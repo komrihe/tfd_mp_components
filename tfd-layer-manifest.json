@@ -1,0 +1,396 @@
+{
+  "schemaVersion": "1.0.0",
+  "styleVersion": "1.0.0",
+  "crs": "EPSG:3857 for tiles; canonical source geometries may remain EPSG:4326",
+  "source": "tfd-vector",
+  "tileExtent": 4096,
+  "recommendedBuffer": 128,
+  "themes": {
+    "light": "tfd-maplibre-style-light.json",
+    "dark": "tfd-maplibre-style-dark.json"
+  },
+  "palette": {
+    "light": {
+      "background": "#F7F5EF",
+      "water": "#DDECF2",
+      "cadastre": "#8A6D3B",
+      "cadastre_fill": "#E8DFC8",
+      "street_motorway": "#D1644D",
+      "street_primary": "#DFA653",
+      "street_secondary": "#CDBB8A",
+      "street_local": "#B9B7B1",
+      "street_casing": "#FFFFFF",
+      "parcel_default": "#DCE8C8",
+      "parcel_residential": "#DDE7D0",
+      "parcel_commercial": "#F1D8B5",
+      "parcel_agriculture": "#D0E3B4",
+      "parcel_public": "#D6E1EE",
+      "parcel_industrial": "#E2D3D0",
+      "parcel_outline": "#7A6E5A",
+      "boundary": "#5E5142",
+      "building": "#CFC7BC",
+      "building_outline": "#A49B8D",
+      "address": "#24435A",
+      "label": "#2B2926",
+      "label_halo": "#FFFDF8",
+      "admin_region": "#6E4F8A",
+      "admin_prefecture": "#866BA0",
+      "admin_commune": "#6C7B9B",
+      "admin_canton": "#8794A7",
+      "admin_quartier": "#9DA6AE",
+      "encumbrance": "#B24C63",
+      "title_active": "#2F7D59",
+      "title_pending": "#B8842E",
+      "title_inactive": "#8A8A8A",
+      "rights": "#4B6EAF",
+      "sheet": "#8A7B6A",
+      "hover": "#1A73E8",
+      "selected": "#0B57D0",
+      "zone_residential": "#C8D5E3",
+      "zone_commercial": "#B7C9D6",
+      "zone_industrial": "#A7B6C6",
+      "zone_mixed": "#BFC8D8",
+      "zone_green": "#B5C9C2",
+      "zone_equipment": "#9EB4C0",
+      "zone_outline": "#5A7A8F",
+      "public_space": "#7FA8A0",
+      "public_equipment": "#6B8F9E",
+      "alignment": "#4A6B82",
+      "setback": "#6E8494",
+      "urban_servitude": "#7A6F8C",
+      "permit_approved": "#3D7A6E",
+      "permit_pending": "#8A7A5C",
+      "permit_refused": "#8B6B6B",
+      "permit_fill": "#A8C4BC",
+      "planning_sheet": "#6A7E8A"
+    },
+    "dark": {
+      "background": "#101418",
+      "water": "#122832",
+      "cadastre": "#C8A96B",
+      "cadastre_fill": "#28261F",
+      "street_motorway": "#F08068",
+      "street_primary": "#E6B764",
+      "street_secondary": "#AFA078",
+      "street_local": "#686D73",
+      "street_casing": "#1C2127",
+      "parcel_default": "#273126",
+      "parcel_residential": "#293629",
+      "parcel_commercial": "#3D3324",
+      "parcel_agriculture": "#273A24",
+      "parcel_public": "#263241",
+      "parcel_industrial": "#392C2D",
+      "parcel_outline": "#93856F",
+      "boundary": "#B9A98E",
+      "building": "#3B4148",
+      "building_outline": "#69717A",
+      "address": "#9BC7E7",
+      "label": "#E7E2D9",
+      "label_halo": "#11161A",
+      "admin_region": "#C69EEB",
+      "admin_prefecture": "#AA8BC6",
+      "admin_commune": "#91A4D3",
+      "admin_canton": "#8390A5",
+      "admin_quartier": "#747D86",
+      "encumbrance": "#E06B82",
+      "title_active": "#63B88B",
+      "title_pending": "#D7A74B",
+      "title_inactive": "#92979B",
+      "rights": "#83A7EB",
+      "sheet": "#A99B88",
+      "hover": "#64B5F6",
+      "selected": "#90CAF9",
+      "zone_residential": "#2A3848",
+      "zone_commercial": "#2C3D48",
+      "zone_industrial": "#303A48",
+      "zone_mixed": "#2E3848",
+      "zone_green": "#2A403A",
+      "zone_equipment": "#2A3A44",
+      "zone_outline": "#8AB0C4",
+      "public_space": "#6F9E96",
+      "public_equipment": "#7A9AAB",
+      "alignment": "#8AB0C4",
+      "setback": "#8A9AAB",
+      "urban_servitude": "#A090B0",
+      "permit_approved": "#5FA890",
+      "permit_pending": "#C4A86A",
+      "permit_refused": "#C48888",
+      "permit_fill": "#3A524C",
+      "planning_sheet": "#8A9AAB"
+    }
+  },
+  "logicalLayers": [
+    {
+      "id": "administrative_units",
+      "sourceLayer": [
+        "admin_units"
+      ],
+      "geometry": [
+        "Polygon",
+        "LineString"
+      ],
+      "minzoom": 5,
+      "labelsFrom": 6,
+      "purpose": "Region, prefecture, commune, canton and quartier boundaries",
+      "interactive": true
+    },
+    {
+      "id": "tfd_cadastre",
+      "sourceLayer": [
+        "tfd_grid",
+        "tfd_localities"
+      ],
+      "geometry": [
+        "Polygon",
+        "Point"
+      ],
+      "minzoom": 8,
+      "labelsFrom": 16,
+      "purpose": "TFD grid cells, locality polygons, cell codes and hierarchy",
+      "interactive": true
+    },
+    {
+      "id": "cadastral_sheets",
+      "sourceLayer": [
+        "cadastral_sections"
+      ],
+      "geometry": [
+        "Polygon"
+      ],
+      "minzoom": 10,
+      "labelsFrom": 13,
+      "purpose": "Legacy sheet/section references and optional scanned raster sheets",
+      "interactive": true,
+      "optionalRasterSource": "cadastral-sheets-raster"
+    },
+    {
+      "id": "tfd_street",
+      "sourceLayer": [
+        "tfd_streets"
+      ],
+      "geometry": [
+        "LineString"
+      ],
+      "minzoom": 9,
+      "labelsFrom": 13,
+      "purpose": "Road centerlines, classification, names and right-of-way",
+      "interactive": true
+    },
+    {
+      "id": "zoning",
+      "sourceLayer": [
+        "zoning"
+      ],
+      "geometry": [
+        "Polygon"
+      ],
+      "minzoom": 9,
+      "labelsFrom": 12,
+      "purpose": "POS/PDU zoning polygons \u2014 zone class, density and height rules",
+      "interactive": true,
+      "optionalRasterSource": "planning-ortho-raster"
+    },
+    {
+      "id": "public_spaces",
+      "sourceLayer": [
+        "public_spaces"
+      ],
+      "geometry": [
+        "Polygon"
+      ],
+      "minzoom": 11,
+      "purpose": "Public green space, plazas and collective equipment (\u00e9quipements)",
+      "interactive": true
+    },
+    {
+      "id": "planning_rules",
+      "sourceLayer": [
+        "planning_rules"
+      ],
+      "geometry": [
+        "LineString"
+      ],
+      "minzoom": 12,
+      "purpose": "Street alignments (alignements) and setbacks (reculs / emprises)",
+      "interactive": true
+    },
+    {
+      "id": "servitudes",
+      "sourceLayer": [
+        "servitudes"
+      ],
+      "geometry": [
+        "Polygon",
+        "LineString"
+      ],
+      "minzoom": 13,
+      "purpose": "Urbanism regulatory constraints (servitudes d'urbanisme) \u2014 distinct from cadastral encumbrances",
+      "interactive": true
+    },
+    {
+      "id": "permits",
+      "sourceLayer": [
+        "permits"
+      ],
+      "geometry": [
+        "Polygon"
+      ],
+      "minzoom": 14,
+      "purpose": "Building permits and construction footprints (permis / emprises)",
+      "interactive": true,
+      "privacy": "restrict applicant PII and permit attachments"
+    },
+    {
+      "id": "parcels",
+      "sourceLayer": [
+        "parcels"
+      ],
+      "geometry": [
+        "Polygon"
+      ],
+      "minzoom": 12,
+      "labelsFrom": 16,
+      "purpose": "Parcel polygons, land use, area, valuation and title state",
+      "interactive": true,
+      "featureState": [
+        "hover",
+        "selected"
+      ]
+    },
+    {
+      "id": "encumbrances",
+      "sourceLayer": [
+        "encumbrances"
+      ],
+      "geometry": [
+        "Polygon",
+        "LineString"
+      ],
+      "minzoom": 13,
+      "purpose": "Easements, servitudes, disputes and mortgages",
+      "interactive": true,
+      "privacy": "restrict party names and financial details"
+    },
+    {
+      "id": "land_titles",
+      "sourceLayer": [
+        "land_titles"
+      ],
+      "geometry": [
+        "Point"
+      ],
+      "minzoom": 14,
+      "purpose": "Title/certificate number, status and issuance date",
+      "interactive": true
+    },
+    {
+      "id": "rights_holders",
+      "sourceLayer": [
+        "rights_holders"
+      ],
+      "geometry": [
+        "Point"
+      ],
+      "minzoom": 15,
+      "purpose": "Parcel-linked rights and tenure markers; no personal-name labels by default",
+      "interactive": true,
+      "privacy": "authorized-inspector-only for PII"
+    },
+    {
+      "id": "parcel_boundaries",
+      "sourceLayer": [
+        "parcel_boundaries"
+      ],
+      "geometry": [
+        "LineString",
+        "Point"
+      ],
+      "minzoom": 14,
+      "purpose": "Surveyed boundary lines, accuracy classes and monuments/markers",
+      "interactive": true
+    },
+    {
+      "id": "buildings",
+      "sourceLayer": [
+        "buildings"
+      ],
+      "geometry": [
+        "Polygon"
+      ],
+      "minzoom": 14,
+      "purpose": "Building footprints, floors, height and use",
+      "interactive": true,
+      "optionalModes": [
+        "3d-buildings"
+      ]
+    },
+    {
+      "id": "addresses",
+      "sourceLayer": [
+        "addresses"
+      ],
+      "geometry": [
+        "Point"
+      ],
+      "minzoom": 16,
+      "labelsFrom": 17,
+      "purpose": "House numbers, street names and geocoded address points",
+      "interactive": true
+    }
+  ],
+  "zOrder": [
+    "background",
+    "legacy cadastral raster / planning ortho",
+    "administrative boundaries",
+    "POS/PDU zoning / public spaces",
+    "localities / cadastral sections / grid",
+    "parcels",
+    "encumbrances",
+    "urbanism servitudes",
+    "buildings",
+    "building permits",
+    "streets",
+    "alignments / setbacks",
+    "surveyed parcel boundaries",
+    "addresses / rights / title markers",
+    "labels"
+  ],
+  "interactionContract": {
+    "hover": {
+      "source": "tfd-vector",
+      "sourceLayer": "parcels",
+      "stateKey": "hover",
+      "styleLayer": "parcels-hover"
+    },
+    "selected": {
+      "source": "tfd-vector",
+      "sourceLayer": "parcels",
+      "stateKey": "selected",
+      "styleLayer": "parcels-selected"
+    },
+    "inspect": "Read layer.metadata[\"tfd:inspector\"] and whitelist fields; never dump arbitrary properties for public users."
+  },
+  "mobileDefaults": {
+    "disable3dByDefault": true,
+    "legacyRasterOffByDefault": true,
+    "maxInteractiveQueryLayers": 12,
+    "labelPaddingPx": 8,
+    "preferPointerMoveThrottlingMs": 32
+  },
+  "exportProfiles": {
+    "screen": {
+      "dpi": 96,
+      "legacyRaster": false,
+      "3d": false
+    },
+    "print": {
+      "dpi": 300,
+      "legacyRaster": "optional",
+      "3d": false,
+      "forceNorthUp": true,
+      "includeLegend": true,
+      "includeScaleBar": true,
+      "includeAttribution": true
+    }
+  }
+}

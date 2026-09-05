@@ -1,0 +1,472 @@
+{
+  "version": 8,
+  "name": "TFD Cadastre Theme – Dark",
+  "metadata": {
+    "maplibre:groups": {
+      "cadastre": { "name": "Cadastre", "collapsed": false },
+      "parcels": { "name": "Parcels & Rights", "collapsed": false },
+      "buildings": { "name": "Buildings & Addresses", "collapsed": false },
+      "admin": { "name": "Administrative", "collapsed": true },
+      "print": { "name": "Print / Export", "collapsed": true }
+    },
+    "tfd:theme": "dark",
+    "tfd:version": "1.0.0"
+  },
+  "sources": {
+    "tfd-tiles": {
+      "type": "vector",
+      "tiles": ["https://your-tile-server.com/tfd/{z}/{x}/{y}.pbf"],
+      "minzoom": 6,
+      "maxzoom": 18,
+      "attribution": "© TFD Cadastre"
+    },
+    "raster-basemap": {
+      "type": "raster",
+      "tiles": ["https://your-raster/{z}/{x}/{y}.png"],
+      "tileSize": 256,
+      "maxzoom": 19
+    }
+  },
+  "sprite": "https://your-cdn.com/sprites/tfd",
+  "glyphs": "https://your-cdn.com/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#1a1d23"
+      }
+    },
+    {
+      "id": "admin-units-fill",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "admin_units",
+      "minzoom": 6,
+      "maxzoom": 14,
+      "paint": {
+        "fill-color": [
+          "match",
+          ["get", "level"],
+          "region", "#2a3540",
+          "prefecture", "#323e4a",
+          "commune", "#3a4a58",
+          "canton", "#425464",
+          "#2e3a46"
+        ],
+        "fill-opacity": [
+          "interpolate", ["linear"], ["zoom"],
+          6, 0.45,
+          12, 0.25,
+          14, 0.08
+        ]
+      },
+      "layout": { "visibility": "visible" }
+    },
+    {
+      "id": "admin-units-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "admin_units",
+      "minzoom": 6,
+      "maxzoom": 15,
+      "paint": {
+        "line-color": "#5a7a9a",
+        "line-width": [
+          "interpolate", ["linear"], ["zoom"],
+          6, 1.5,
+          12, 2.5,
+          14, 1.2
+        ],
+        "line-opacity": 0.75
+      }
+    },
+    {
+      "id": "cadastral-sheets",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "cadastral_sheets",
+      "minzoom": 10,
+      "maxzoom": 16,
+      "paint": {
+        "fill-color": "#2e2820",
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#b89a6e"
+      }
+    },
+    {
+      "id": "tfd-cadastre-grid",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "tfd_cadastre",
+      "minzoom": 12,
+      "paint": {
+        "fill-color": "#3d342c",
+        "fill-opacity": [
+          "interpolate", ["linear"], ["zoom"],
+          12, 0.22,
+          16, 0.12,
+          18, 0.06
+        ],
+        "fill-outline-color": "#a89070"
+      }
+    },
+    {
+      "id": "tfd-cadastre-cells",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "tfd_cadastre",
+      "minzoom": 13,
+      "paint": {
+        "line-color": "#a89070",
+        "line-width": [
+          "interpolate", ["linear"], ["zoom"],
+          13, 0.7,
+          16, 1.3,
+          19, 1.9
+        ],
+        "line-opacity": 0.9
+      }
+    },
+    {
+      "id": "tfd-cadastre-labels",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "tfd_cadastre",
+      "minzoom": 14,
+      "layout": {
+        "text-field": ["get", "cell_code"],
+        "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+        "text-size": [
+          "interpolate", ["linear"], ["zoom"],
+          14, 10,
+          17, 13,
+          20, 15
+        ],
+        "text-anchor": "center",
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "symbol-placement": "point",
+        "text-max-width": 8
+      },
+      "paint": {
+        "text-color": "#d4c4b0",
+        "text-halo-color": "#1a1d23",
+        "text-halo-width": 1.6,
+        "text-opacity": [
+          "interpolate", ["linear"], ["zoom"],
+          14, 0.75,
+          16, 1
+        ]
+      }
+    },
+    {
+      "id": "streets-casing",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "streets",
+      "minzoom": 8,
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#1a1d23",
+        "line-width": [
+          "interpolate", ["linear"], ["zoom"],
+          8, ["match", ["get", "class"], "motorway", 4.5, "primary", 3.5, "secondary", 2.8, 1.8],
+          14, ["match", ["get", "class"], "motorway", 13, "primary", 10, "secondary", 7.5, 4.5],
+          18, ["match", ["get", "class"], "motorway", 24, "primary", 17, "secondary", 13, 8]
+        ]
+      }
+    },
+    {
+      "id": "streets-fill",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "streets",
+      "minzoom": 8,
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          ["get", "class"],
+          "motorway", "#4a5260",
+          "primary", "#3a404c",
+          "secondary", "#323842",
+          "#2a2e36"
+        ],
+        "line-width": [
+          "interpolate", ["linear"], ["zoom"],
+          8, ["match", ["get", "class"], "motorway", 2.8, "primary", 2.2, "secondary", 1.6, 0.9],
+          14, ["match", ["get", "class"], "motorway", 9.5, "primary", 7, "secondary", 5.2, 2.8],
+          18, ["match", ["get", "class"], "motorway", 19, "primary", 14, "secondary", 10, 5]
+        ]
+      }
+    },
+    {
+      "id": "streets-labels",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "streets",
+      "minzoom": 13,
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-font": ["Open Sans Semibold", "Arial Unicode MS Regular"],
+        "text-size": [
+          "interpolate", ["linear"], ["zoom"],
+          13, 11,
+          16, 13,
+          19, 15
+        ],
+        "symbol-placement": "line",
+        "text-rotation-alignment": "map",
+        "text-pitch-alignment": "viewport",
+        "text-max-angle": 30,
+        "text-padding": 2,
+        "text-allow-overlap": false
+      },
+      "paint": {
+        "text-color": "#e8e4df",
+        "text-halo-color": "#1a1d23",
+        "text-halo-width": 1.8,
+        "text-halo-blur": 0.5
+      }
+    },
+    {
+      "id": "parcels-fill",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "parcels",
+      "minzoom": 14,
+      "paint": {
+        "fill-color": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false], "#8fbc7a",
+          ["boolean", ["feature-state", "selected"], false], "#6a9e5a",
+          "#2d3a2a"
+        ],
+        "fill-opacity": [
+          "interpolate", ["linear"], ["zoom"],
+          14, 0.5,
+          17, 0.6,
+          20, 0.45
+        ],
+        "fill-outline-color": "#8fbc7a"
+      }
+    },
+    {
+      "id": "parcel-boundaries",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "parcel_boundaries",
+      "minzoom": 15,
+      "paint": {
+        "line-color": [
+          "match",
+          ["get", "accuracy_class"],
+          "surveyed", "#d4a574",
+          "approximate", "#a89070",
+          "#8b7355"
+        ],
+        "line-width": [
+          "interpolate", ["linear"], ["zoom"],
+          15, 0.9,
+          18, 1.8,
+          20, 2.4
+        ],
+        "line-dasharray": [
+          "match",
+          ["get", "accuracy_class"],
+          "approximate", ["literal", [2, 1.5]],
+          ["literal", [1, 0]]
+        ]
+      }
+    },
+    {
+      "id": "buildings-fill",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "buildings",
+      "minzoom": 15,
+      "paint": {
+        "fill-color": "#4a4038",
+        "fill-opacity": 0.9,
+        "fill-outline-color": "#c4a882"
+      }
+    },
+    {
+      "id": "buildings-3d",
+      "type": "fill-extrusion",
+      "source": "tfd-tiles",
+      "source-layer": "buildings",
+      "minzoom": 16,
+      "paint": {
+        "fill-extrusion-color": "#4a4038",
+        "fill-extrusion-height": ["coalesce", ["get", "height"], ["*", ["get", "floors"], 3.2], 6],
+        "fill-extrusion-base": 0,
+        "fill-extrusion-opacity": 0.92
+      },
+      "layout": { "visibility": "none" }
+    },
+    {
+      "id": "addresses",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "addresses",
+      "minzoom": 16,
+      "layout": {
+        "text-field": ["get", "housenumber"],
+        "text-font": ["Open Sans Bold", "Arial Unicode MS Regular"],
+        "text-size": [
+          "interpolate", ["linear"], ["zoom"],
+          16, 11,
+          19, 14
+        ],
+        "text-anchor": "center",
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "text-padding": 4,
+        "symbol-sort-key": ["get", "priority"]
+      },
+      "paint": {
+        "text-color": "#e8e4df",
+        "text-halo-color": "#1a1d23",
+        "text-halo-width": 1.8
+      }
+    },
+    {
+      "id": "owners-points",
+      "type": "circle",
+      "source": "tfd-tiles",
+      "source-layer": "owners",
+      "minzoom": 15,
+      "paint": {
+        "circle-radius": [
+          "interpolate", ["linear"], ["zoom"],
+          15, 3.2,
+          18, 5.5
+        ],
+        "circle-color": [
+          "match",
+          ["get", "ownership_type"],
+          "freehold", "#6ab0c4",
+          "leasehold", "#8ac4d4",
+          "communal", "#8fbc7a",
+          "#909090"
+        ],
+        "circle-stroke-width": 1.5,
+        "circle-stroke-color": "#1a1d23",
+        "circle-opacity": 0.95
+      }
+    },
+    {
+      "id": "land-titles",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "land_titles",
+      "minzoom": 15,
+      "layout": {
+        "text-field": ["get", "title_number"],
+        "text-font": ["Open Sans Regular"],
+        "text-size": 11,
+        "text-offset": [0, 1.2],
+        "text-anchor": "top",
+        "text-allow-overlap": false
+      },
+      "paint": {
+        "text-color": "#6ab0c4",
+        "text-halo-color": "#1a1d23",
+        "text-halo-width": 1.3
+      }
+    },
+    {
+      "id": "encumbrances",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "encumbrances",
+      "minzoom": 15,
+      "paint": {
+        "fill-color": "#3a2222",
+        "fill-opacity": 0.5,
+        "fill-outline-color": "#e07070"
+      }
+    },
+    {
+      "id": "encumbrances-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "encumbrances",
+      "minzoom": 15,
+      "paint": {
+        "line-color": "#e07070",
+        "line-width": 1.9,
+        "line-dasharray": [3, 2]
+      }
+    },
+
+    {
+      "id": "print-admin-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "admin_units",
+      "minzoom": 6,
+      "layout": { "visibility": "none" },
+      "paint": {
+        "line-color": "#000000",
+        "line-width": 2.5,
+        "line-opacity": 1
+      }
+    },
+    {
+      "id": "print-parcels-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "parcels",
+      "minzoom": 14,
+      "layout": { "visibility": "none" },
+      "paint": {
+        "line-color": "#000000",
+        "line-width": 1.4,
+        "line-opacity": 1
+      }
+    },
+    {
+      "id": "print-buildings-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "buildings",
+      "minzoom": 15,
+      "layout": { "visibility": "none" },
+      "paint": {
+        "line-color": "#000000",
+        "line-width": 1.1,
+        "line-opacity": 1
+      }
+    },
+    {
+      "id": "print-labels-high-contrast",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "addresses",
+      "minzoom": 15,
+      "layout": {
+        "visibility": "none",
+        "text-field": ["concat", ["get", "housenumber"], " ", ["get", "street"]],
+        "text-font": ["Open Sans Bold"],
+        "text-size": 13,
+        "text-anchor": "center",
+        "text-allow-overlap": true,
+        "text-ignore-placement": true
+      },
+      "paint": {
+        "text-color": "#000000",
+        "text-halo-color": "#ffffff",
+        "text-halo-width": 2.5
+      }
+    }
+  ]
+}

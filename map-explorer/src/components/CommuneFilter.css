@@ -1,0 +1,218 @@
+.cf {
+  --cf-bg: rgba(15, 18, 24, 0.96);
+  --cf-line: rgba(232, 226, 214, 0.1);
+  --cf-text: #ebe6dc;
+  --cf-muted: #9a9388;
+  --cf-accent: #5a7a8f;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+.cf-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--cf-line);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cf-text);
+  cursor: pointer;
+  transform: none;
+  box-shadow: none;
+}
+
+.cf-toggle:hover {
+  border-color: rgba(90, 122, 143, 0.45);
+  background: rgba(90, 122, 143, 0.08);
+  transform: none;
+  box-shadow: none;
+}
+
+.cf-toggle-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cf-toggle-meta {
+  font-size: 11px;
+  color: var(--cf-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cf-panel {
+  margin-top: 8px;
+  border: 1px solid var(--cf-line);
+  background: var(--cf-bg);
+  display: flex;
+  flex-direction: column;
+  max-height: 280px;
+}
+
+.cf-toolbar {
+  padding: 8px;
+  border-bottom: 1px solid var(--cf-line);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.cf-search {
+  width: 100%;
+  margin: 0;
+  padding: 7px 9px;
+  border: 1px solid var(--cf-line);
+  border-radius: 0;
+  background: #0a0c0f;
+  color: var(--cf-text);
+  font-size: 12px;
+}
+
+.cf-search:focus {
+  outline: 1px solid var(--cf-accent);
+  border-color: var(--cf-accent);
+}
+
+.cf-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.cf-btn {
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid var(--cf-line);
+  background: transparent;
+  color: var(--cf-muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform: none;
+  box-shadow: none;
+}
+
+.cf-btn:hover:not(:disabled) {
+  color: var(--cf-text);
+  border-color: rgba(90, 122, 143, 0.5);
+  transform: none;
+  box-shadow: none;
+}
+
+.cf-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.cf-hint {
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--cf-muted);
+  border-bottom: 1px solid var(--cf-line);
+}
+
+.cf-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.cf-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 7px 10px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transform: none;
+  box-shadow: none;
+}
+
+.cf-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: none;
+  box-shadow: none;
+}
+
+.cf-item.is-on {
+  background: rgba(90, 122, 143, 0.12);
+}
+
+.cf-check {
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(232, 226, 214, 0.25);
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.cf-check.is-on {
+  background: #5a7a8f;
+  border-color: #5a7a8f;
+  box-shadow: inset 0 0 0 2px #0a0c0f;
+}
+
+.cf-item-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cf-item-name {
+  font-size: 12px;
+  color: var(--cf-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cf-item-code {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--cf-muted);
+}
+
+.cf-empty {
+  padding: 12px;
+  font-size: 12px;
+  color: var(--cf-muted);
+}
+
+/* Compact floating card for Map View */
+.cf--compact {
+  position: absolute;
+  top: 58px;
+  left: 14px;
+  z-index: 20;
+  width: min(280px, calc(100vw - 28px));
+  background: rgba(17, 19, 24, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.cf--compact .cf-toggle {
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cf--compact .cf-panel {
+  margin: 0;
+  border: none;
+  max-height: min(320px, 50vh);
+}

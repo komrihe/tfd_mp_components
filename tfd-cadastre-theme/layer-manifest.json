@@ -1,0 +1,275 @@
+{
+  "theme": "TFD Cadastre",
+  "version": "1.0.0",
+  "description": "Complete cadastral / land administration MapLibre theme with light & dark variants, print mode, and offline support",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "description": "Map background",
+      "z-index": 0
+    },
+    {
+      "id": "admin-units-fill",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "admin_units",
+      "description": "Region → Prefecture → Commune → Canton → Quartier",
+      "attributes": ["level", "name", "code", "parent_id"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 10,
+      "minzoom": 6,
+      "maxzoom": 14
+    },
+    {
+      "id": "admin-units-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "admin_units",
+      "description": "Administrative boundaries",
+      "z-index": 11,
+      "minzoom": 6,
+      "maxzoom": 15
+    },
+    {
+      "id": "cadastral-sheets",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "cadastral_sheets",
+      "description": "Legacy sheet references + section codes",
+      "attributes": ["sheet_ref", "section_code", "year"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 20,
+      "minzoom": 10,
+      "maxzoom": 16
+    },
+    {
+      "id": "tfd-cadastre-grid",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "tfd_cadastre",
+      "description": "Cadastre grid cells + locality polygons",
+      "attributes": ["cell_code", "hierarchy", "locality_name"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 30,
+      "minzoom": 12
+    },
+    {
+      "id": "tfd-cadastre-cells",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "tfd_cadastre",
+      "description": "Cadastre cell outlines",
+      "z-index": 31,
+      "minzoom": 13
+    },
+    {
+      "id": "tfd-cadastre-labels",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "tfd_cadastre",
+      "description": "Cell codes",
+      "z-index": 32,
+      "minzoom": 14
+    },
+    {
+      "id": "streets-casing",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "streets",
+      "description": "Road casing",
+      "z-index": 39,
+      "minzoom": 8
+    },
+    {
+      "id": "streets-fill",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "streets",
+      "description": "Road centerlines with classification & ROW",
+      "attributes": ["name", "class", "right_of_way", "surface"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 40,
+      "minzoom": 8
+    },
+    {
+      "id": "streets-labels",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "streets",
+      "description": "Street names",
+      "z-index": 41,
+      "minzoom": 13
+    },
+    {
+      "id": "parcels-fill",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "parcels",
+      "description": "Parcel polygons with ownership, area, land use, valuation",
+      "attributes": ["parcel_id", "owner_id", "area_m2", "land_use", "valuation", "status"],
+      "interactive": true,
+      "hover": true,
+      "inspector": true,
+      "z-index": 50,
+      "minzoom": 14
+    },
+    {
+      "id": "parcel-boundaries",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "parcel_boundaries",
+      "description": "Surveyed boundary lines + accuracy class + markers",
+      "attributes": ["accuracy_class", "survey_date", "marker_type"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 55,
+      "minzoom": 15
+    },
+    {
+      "id": "encumbrances",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "encumbrances",
+      "description": "Easements, servitudes, disputes, mortgages",
+      "attributes": ["type", "status", "parties", "registered"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 58,
+      "minzoom": 15
+    },
+    {
+      "id": "encumbrances-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "encumbrances",
+      "description": "Encumbrance outlines",
+      "z-index": 59,
+      "minzoom": 15
+    },
+    {
+      "id": "buildings-fill",
+      "type": "fill",
+      "source": "tfd-tiles",
+      "source-layer": "buildings",
+      "description": "Building footprints, floors, height, use",
+      "attributes": ["building_id", "floors", "height", "use", "year_built"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 60,
+      "minzoom": 15
+    },
+    {
+      "id": "buildings-3d",
+      "type": "fill-extrusion",
+      "source": "tfd-tiles",
+      "source-layer": "buildings",
+      "description": "3D extruded buildings (toggleable)",
+      "z-index": 61,
+      "minzoom": 16,
+      "defaultVisibility": "none"
+    },
+    {
+      "id": "owners-points",
+      "type": "circle",
+      "source": "tfd-tiles",
+      "source-layer": "owners",
+      "description": "Rights holders linked to parcels",
+      "attributes": ["owner_id", "ownership_type", "tenure", "name"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 65,
+      "minzoom": 15
+    },
+    {
+      "id": "land-titles",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "land_titles",
+      "description": "Title number, status, issuance date",
+      "attributes": ["title_number", "status", "issued", "expires"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 68,
+      "minzoom": 15
+    },
+    {
+      "id": "addresses",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "addresses",
+      "description": "House numbers + street names (geocoded)",
+      "attributes": ["housenumber", "street", "unit", "postcode"],
+      "interactive": true,
+      "inspector": true,
+      "z-index": 70,
+      "minzoom": 16
+    },
+    {
+      "id": "print-admin-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "admin_units",
+      "description": "Print mode – high-contrast admin boundaries",
+      "z-index": 100,
+      "defaultVisibility": "none"
+    },
+    {
+      "id": "print-parcels-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "parcels",
+      "description": "Print mode – high-contrast parcel boundaries",
+      "z-index": 101,
+      "defaultVisibility": "none"
+    },
+    {
+      "id": "print-buildings-outline",
+      "type": "line",
+      "source": "tfd-tiles",
+      "source-layer": "buildings",
+      "description": "Print mode – high-contrast building outlines",
+      "z-index": 102,
+      "defaultVisibility": "none"
+    },
+    {
+      "id": "print-labels-high-contrast",
+      "type": "symbol",
+      "source": "tfd-tiles",
+      "source-layer": "addresses",
+      "description": "Print mode – high-contrast address labels",
+      "z-index": 103,
+      "defaultVisibility": "none"
+    }
+  ],
+  "colorPalette": {
+    "light": {
+      "background": "#f8f5f0",
+      "cadastre": "#c9b8a8 / #8b7355",
+      "streets": "#ffffff → #e8e4df",
+      "parcels": "#e8f0e0 / #7a9e6a",
+      "boundaries": "#5c4033",
+      "buildings": "#d4c4b0 / #a89070",
+      "addresses": "#2c3e50",
+      "admin": "#b8c9d9 → #6b8cae",
+      "titles": "#4a90a4",
+      "encumbrances": "#f5d0d0 / #c45c5c"
+    },
+    "dark": {
+      "background": "#1a1d23",
+      "cadastre": "#3d342c / #a89070",
+      "streets": "#2a2e36 → #4a5260",
+      "parcels": "#2d3a2a / #8fbc7a",
+      "boundaries": "#d4a574",
+      "buildings": "#4a4038 / #c4a882",
+      "addresses": "#e8e4df",
+      "admin": "#2a3540 → #5a7a9a",
+      "titles": "#6ab0c4",
+      "encumbrances": "#3a2222 / #e07070"
+    }
+  }
+}

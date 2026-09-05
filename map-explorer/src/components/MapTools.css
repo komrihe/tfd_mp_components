@@ -1,0 +1,167 @@
+/* Compact dark TFD tools rail — urbanisme / cadastre */
+
+.map-tools {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(17, 19, 24, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  max-width: calc(100vw - 28px);
+  overflow-x: auto;
+}
+
+.map-tools-group {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.map-tools-sep {
+  width: 1px;
+  align-self: stretch;
+  margin: 2px 4px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.map-tools-btn {
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #9a9388;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transform: none;
+  box-shadow: none;
+}
+
+.map-tools-btn:hover {
+  color: #ebe6dc;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
+  transform: none;
+  box-shadow: none;
+}
+
+.map-tools-btn.is-active {
+  color: #00e5b0;
+  background: rgba(0, 229, 176, 0.1);
+  border-color: rgba(0, 229, 176, 0.35);
+}
+
+.map-tools-btn--action {
+  color: #c8c2b6;
+}
+
+.map-tools-readout {
+  position: absolute;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(17, 19, 24, 0.94);
+  border: 1px solid rgba(0, 229, 176, 0.28);
+  color: #ebe6dc;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  max-width: min(420px, calc(100vw - 28px));
+}
+
+.map-tools-readout-main {
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #00e5b0;
+}
+
+.map-tools-readout-detail {
+  font-size: 11px;
+  color: #9a9388;
+}
+
+.map-tools-copy {
+  margin: 0 0 0 auto;
+  padding: 4px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.04);
+  color: #ebe6dc;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transform: none;
+  box-shadow: none;
+}
+
+.map-tools-copy:hover {
+  border-color: rgba(0, 229, 176, 0.4);
+  color: #00e5b0;
+  transform: none;
+  box-shadow: none;
+}
+
+.map-tools-status {
+  position: absolute;
+  bottom: 28px;
+  left: 12px;
+  z-index: 90;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 4px 8px;
+  background: rgba(17, 19, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #8891a4;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.map-tools-status-tool {
+  color: #5BB89A;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 768px) {
+  .map-tools {
+    top: auto;
+    bottom: 52px;
+    left: 12px;
+    right: 12px;
+    transform: none;
+    justify-content: flex-start;
+  }
+
+  .map-tools-readout {
+    top: auto;
+    bottom: 96px;
+    left: 12px;
+    right: 12px;
+    transform: none;
+  }
+
+  .map-tools-status {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+  }
+}
